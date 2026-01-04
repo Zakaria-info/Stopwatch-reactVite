@@ -11,8 +11,9 @@ function Stopwatch() {
         setElapsedTime(Date.now() - startTimeRef.current);
       }, 10);
     }
-    clearInterval(intervalIdRef.current);
-
+    return () =>{
+        clearInterval(intervalIdRef.current);
+    }
   }, [isRunning]);
 
   function start() {
@@ -20,17 +21,17 @@ function Stopwatch() {
     startTimeRef.current = Date.now() - elapsedTime;
   }
   function stop() {
-    isRunning(false);
+    setIsRunning(false);
   }
   function reset() {
     setElapsedTime(0);
     setIsRunning(false);
   }
   function formatTime() {
-    let hours = math.floor(elapsedTime / (1000*60*60));
-    let minitues = math.floor(elapsedTime / (1000*60) % 60);
-    let seconds = math.floor(elapsedTime / (1000) % 60);
-    let milliseconds = math.floor((elapsedTime % 1000) /10);
+    let hours = Math.floor(elapsedTime / (1000*60*60));
+    let minitues = Math.floor(elapsedTime / (1000*60) % 60);
+    let seconds = Math.floor(elapsedTime / (1000) % 60);
+    let milliseconds = Math.floor((elapsedTime % 1000) /10);
 
 
     return `${minitues}:${seconds}:${milliseconds}`;
